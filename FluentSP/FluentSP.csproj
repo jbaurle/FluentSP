@@ -33,27 +33,30 @@
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.SharePoint.dll</HintPath>
+      <HintPath>..\..\lib\Microsoft.SharePoint.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\BaseItemFacade.cs" />
-    <Compile Include="Core\BaseCollectionFacade.cs" />
+    <Compile Include="BaseItemFacade.cs" />
+    <Compile Include="SPWebCollectionFacade.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="SPListItemCollectionFacade.cs" />
+    <Compile Include="SPListItemFacade.cs" />
+    <Compile Include="BaseFacade.cs" />
+    <Compile Include="BaseCollectionFacade.cs" />
     <Compile Include="FluentSP.cs" />
     <Compile Include="SPListFacade.cs" />
-    <Compile Include="SPListCollectionsFacade.cs" />
-    <Compile Include="Core\BaseFacade.cs" />
-    <Compile Include="SPSiteCollectionsFacade.cs" />
-    <Compile Include="Extensions\SPWebExtensions.cs" />
+    <Compile Include="SPListCollectionFacade.cs" />
+    <Compile Include="SPSiteCollectionFacade.cs" />
     <Compile Include="SPWebFacade.cs" />
-    <Compile Include="Extensions\SPSiteCollectionExtensions.cs" />
-    <Compile Include="Extensions\SPSiteExtensions.cs" />
     <Compile Include="SPSiteFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

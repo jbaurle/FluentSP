@@ -1,28 +1,31 @@
-﻿using System;
+﻿// Copyright © Jürgen Bäurle, http://www.parago.de
+// This code released under the terms of the Microsoft Public License (MS-PL)
+
+using System;
 using Microsoft.SharePoint;
 
 namespace FluentSP
 {
-	public static class FluentSP
+	public static class FluentSP 
 	{
-		public static SPSiteFacade CurrentSite()
+		public static SPSiteFacade<BaseFacade> CurrentSite()
 		{
-			return new SPSiteFacade(GetCurrentContext().Site);
+			return GetCurrentContext().Site.Use();
 		}
 
-		public static SPWebFacade CurrentWeb()
+		public static SPWebFacade<BaseFacade> CurrentWeb()
 		{
-			return new SPWebFacade(GetCurrentContext().Web);
+			return GetCurrentContext().Web.Use();
 		}
 
-		public static SPListCollectionFacade CurrentLists()
+		public static SPListCollectionFacade<BaseFacade> CurrentLists()
 		{
-			return new SPListCollectionFacade(GetCurrentContext().Web.Lists);
+			return GetCurrentContext().Web.Lists.Use();
 		}
 
-		public static SPListCollectionFacade RootWebLists()
+		public static SPListCollectionFacade<BaseFacade> RootWebLists()
 		{
-			return new SPListCollectionFacade(GetCurrentContext().Site.RootWeb.Lists);
+			return GetCurrentContext().Site.RootWeb.Lists.Use();
 		}
 
 		#region Helper Methods
