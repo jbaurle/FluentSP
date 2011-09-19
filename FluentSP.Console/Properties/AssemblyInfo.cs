@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿// Copyright © Jürgen Bäurle, http://www.parago.de
+// This code released under the terms of the Microsoft Public License (MS-PL)
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("FluentSP.Tests.Console")]

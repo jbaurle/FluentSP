@@ -1,38 +1,44 @@
-﻿using System;
+﻿// Copyright © Jürgen Bäurle, http://www.parago.de
+// This code released under the terms of the Microsoft Public License (MS-PL)
+
+using System;
 using Microsoft.SharePoint;
 
 namespace FluentSP
 {
-	public class SPSiteFacade : BaseItemFacade<SPSiteFacade, SPSiteCollectionFacade, SPSite>
+	public class SPSiteFacade<TParentFacade> : BaseItemFacade<SPSiteFacade<TParentFacade>, TParentFacade, SPSite>
+		where TParentFacade : BaseFacade
 	{
-		public SPSiteFacade(SPSite site)
-			: base(null, site)
+		public SPSiteFacade(TParentFacade parentFacade, SPSite site)
+			: base(parentFacade, site)
 		{
 		}
 
-		public SPWebFacade RootWeb()
+		public SPWebFacade<SPSiteFacade<TParentFacade>> Web(string name)
 		{
-			return new SPWebFacade(this, Item.RootWeb);
+			if(string.IsNullOrEmpty(name))
+				throw new ArgumentNullException(name);
+
+			SPWeb web = null;
+
+			DataItem.AllWebs.Use()
+					  .Where(w => w.Title == name)
+					  .IfEmpty(f => { throw new InvalidOperationException(string.Format("Web with name '{0}' not found", name)); })
+					  .WithFirst(l => { web = l; });
+
+			return new SPWebFacade<SPSiteFacade<TParentFacade>>(this, web);
 		}
 
-		///// <summary>
-		///// Set story state to Delivered for all stories that has a Finished state
-		///// </summary>
-		///// <returns>This</returns>
-		//public ProjectFacade DeliverAllFinishedStories()
-		//{
-		//   var lStoryRepo = new Repository.PivotalStoryRepository(this.RootFacade.Token);
-		//   lStoryRepo.DeliverAllFinishedStories(this.Item.Id);
-		//   return this;
-		//}
+		public SPWebFacade<SPSiteFacade<TParentFacade>> RootWeb()
+		{
+			return new SPWebFacade<SPSiteFacade<TParentFacade>>(this, DataItem.RootWeb);
+		}
 
-		//public ProjectFacade AcceptAllDeliveredStories()
-		//{
-		//   this.Stories().Filter("state:delivered").UpdateAll(s => {
-		//      s.CurrentState = StoryStateEnum.Accepted;
-		//   });
+		public SPWebCollectionFacade<SPSiteFacade<TParentFacade>> AllWebs()
+		{
+			return new SPWebCollectionFacade<SPSiteFacade<TParentFacade>>(this, DataItem.AllWebs);
+		}
 
-		//   return this;
-		//}
+		// TODO: Add more useful methods
 	}
 }
