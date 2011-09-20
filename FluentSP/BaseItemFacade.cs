@@ -2,9 +2,14 @@
 // This code released under the terms of the Microsoft Public License (MS-PL)
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Permissions;
+using Microsoft.SharePoint.Security;
 
 namespace FluentSP
 {
+	[SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
+	[SharePointPermission(SecurityAction.InheritanceDemand, ObjectModel = true)]
 	public abstract class BaseItemFacade<TCurrentFacade, TParentFacade, TDataItem> : BaseFacade<TCurrentFacade, TParentFacade>
 		where TCurrentFacade : BaseFacade
 		where TParentFacade : BaseFacade
@@ -12,6 +17,7 @@ namespace FluentSP
 	{
 		protected virtual TDataItem DataItem { get; set; }
 
+		[SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
 		public BaseItemFacade(TParentFacade parentFacade, TDataItem dataItem)
 			: base(parentFacade)
 		{

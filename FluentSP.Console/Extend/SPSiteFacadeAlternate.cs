@@ -3,7 +3,7 @@
 
 using Microsoft.SharePoint;
 
-namespace FluentSP
+namespace FluentSP.Tests
 {
 	public class SPSiteFacadeAlternate<TParentFacade> : SPSiteFacade<TParentFacade>
 		where TParentFacade : BaseFacade

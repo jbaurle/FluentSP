@@ -107,21 +107,21 @@ namespace FluentSP
 			}
 		}
 
-		public static IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-		{
-			if(source == null)
-				throw new ArgumentNullException("source");
-			if(predicate == null)
-				throw new ArgumentNullException("predicate");
+		//public static IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+		//{
+		//   if(source == null)
+		//      throw new ArgumentNullException("source");
+		//   if(predicate == null)
+		//      throw new ArgumentNullException("predicate");
 
-			foreach(TSource item in source)
-			{
-				if(!predicate(item))
-					break;
+		//   foreach(TSource item in source)
+		//   {
+		//      if(!predicate(item))
+		//         break;
 
-				yield return item;
-			}
-		}
+		//      yield return item;
+		//   }
+		//}
 
 		#endregion
 	}

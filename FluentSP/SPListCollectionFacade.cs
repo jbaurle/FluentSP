@@ -2,10 +2,14 @@
 // This code released under the terms of the Microsoft Public License (MS-PL)
 
 using System;
+using System.Security.Permissions;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
 
 namespace FluentSP
 {
+	[SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
+	[SharePointPermission(SecurityAction.InheritanceDemand, ObjectModel = true)]
 	public class SPListCollectionFacade<TParentFacade> : BaseCollectionFacade<SPListCollectionFacade<TParentFacade>, TParentFacade, SPListCollection, SPList>
 		where TParentFacade : BaseFacade
 	{

@@ -8,7 +8,7 @@
     <ProjectGuid>{9B4FE99D-832C-4782-8758-B8AA9D447AAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluentSP</RootNamespace>
+    <RootNamespace>FluentSP.Core</RootNamespace>
     <AssemblyName>FluentSP</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -36,6 +36,10 @@
       <HintPath>..\..\lib\Microsoft.SharePoint.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.SharePoint.Security, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\ISAPI\Microsoft.SharePoint.Security.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
@@ -52,7 +56,7 @@
     <Compile Include="SPListItemFacade.cs" />
     <Compile Include="BaseFacade.cs" />
     <Compile Include="BaseCollectionFacade.cs" />
-    <Compile Include="FluentSP.cs" />
+    <Compile Include="SP.cs" />
     <Compile Include="SPListFacade.cs" />
     <Compile Include="SPListCollectionFacade.cs" />
     <Compile Include="SPSiteCollectionFacade.cs" />
