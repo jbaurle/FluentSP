@@ -3,10 +3,14 @@
 
 using System;
 using System.Linq;
+using System.Security.Permissions;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
 
 namespace FluentSP
 {
+	[SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
+	[SharePointPermission(SecurityAction.InheritanceDemand, ObjectModel = true)]
 	public class SPListItemCollectionFacade<TParentFacade> : BaseCollectionFacade<SPListItemCollectionFacade<TParentFacade>, TParentFacade, SPListItemCollection, SPListItem>
 		where TParentFacade : BaseFacade
 	{

@@ -2,11 +2,14 @@
 // This code released under the terms of the Microsoft Public License (MS-PL)
 
 using System;
+using System.Security.Permissions;
 using System.Text.RegularExpressions;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
 
 namespace FluentSP
 {
+	[SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
 	public class SPWebFacade<TParentFacade> : BaseItemFacade<SPWebFacade<TParentFacade>, TParentFacade, SPWeb>
 		where TParentFacade : BaseFacade
 	{

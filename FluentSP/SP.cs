@@ -2,11 +2,14 @@
 // This code released under the terms of the Microsoft Public License (MS-PL)
 
 using System;
+using System.Security.Permissions;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
 
 namespace FluentSP
 {
-	public static class FluentSP 
+	[SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
+	public static class SP 
 	{
 		public static SPSiteFacade<BaseFacade> CurrentSite()
 		{

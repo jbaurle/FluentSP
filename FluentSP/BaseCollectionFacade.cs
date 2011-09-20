@@ -3,11 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Permissions;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
 
 namespace FluentSP
 {
+	[SharePointPermission(SecurityAction.LinkDemand, ObjectModel = true)]
+	[SharePointPermission(SecurityAction.InheritanceDemand, ObjectModel=true)]
 	public abstract class BaseCollectionFacade<TCurrentFacade, TParentFacade, TCollection, TCollectionItem> : BaseItemFacade<TCurrentFacade, TParentFacade, TCollection>
 		where TCurrentFacade : BaseFacade
 		where TParentFacade : BaseFacade
@@ -21,6 +26,7 @@ namespace FluentSP
 		{
 		}
 
+		[SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
 		public BaseCollectionFacade(TParentFacade parentFacade, TCollection collection)
 			: base(parentFacade, collection)
 		{
