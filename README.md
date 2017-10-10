@@ -11,10 +11,10 @@ Checkout this CodeProject article [A Look at Fluent APIs](http://www.codeproject
 To start into the fluent API you call the **Use()** method on _SPSite_, _SPWeb_, _SPWebCollection_ or _SPListCollection_. The Use() method is implemented as an extension method that will return the entry facade object (see facade table below). Another entry point to the fluent API is the static class **SP** with its static methods CurrentSite, CurrentWeb, CurrentLists or RootWebLists.
 
 ```cs
-SPContext.Current.Site.Use()... // => Returns the SPSiteFacade as entry point
+SPContext.Current.Site.Use()...    // => Returns the SPSiteFacade as entry point
 
 // OR:
-SP.CurrentSite()...       // => Returns the SPSiteFacade as entry point 
+SP.CurrentSite()...                // => Returns the SPSiteFacade as entry point 
 ```
 
 Using the entry facade instance you can start chaining the available facade methods as follows: 
