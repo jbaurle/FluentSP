@@ -188,7 +188,8 @@ For more samples and details check out the source code you can download from thi
 
 **Built-In Facades and Methods**
 
-|| Facade || Base Class || Methods || Description ||
+| Facade | Base Class | Methods | Description |
+| --- | --- | --- | --- |
 | SPSiteFacade | BaseItemFacade | RootWeb | Returns a SPWebFacade instance for the root web of the given site |
 | | | AllWebs | Returns a SPWebCollectionFacade instance with all site webs |
 | SPWebFacade | BaseItemFacade | AllowUnsafeUpdate | Sets the SPWeb.AllowUnsafeUpdate property to true for the SPWeb object |
