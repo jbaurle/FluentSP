@@ -10,15 +10,16 @@ Checkout this CodeProject article [A Look at Fluent APIs](http://www.codeproject
 
 To start into the fluent API you call the **Use()** method on _SPSite_, _SPWeb_, _SPWebCollection_ or _SPListCollection_. The Use() method is implemented as an extension method that will return the entry facade object (see facade table below). Another entry point to the fluent API is the static class **SP** with its static methods CurrentSite, CurrentWeb, CurrentLists or RootWebLists.
 
-{code:c#}
+```cs
 SPContext.Current.Site.Use()... // => Returns the SPSiteFacade as entry point
 
 // OR:
 SP.CurrentSite()...       // => Returns the SPSiteFacade as entry point 
-{code:c#}
+```
+
 Using the entry facade instance you can start chaining the available facade methods as follows: 
 
-{code:c#}
+```cs
 SP.CurrentSite().Web("Home").List("Tasks").Items().ForEach(i => // Do something with the item i of type SPListItem...);
 
 // OR:
@@ -27,10 +28,11 @@ SP.CurrentSite()
        .List("Tasks")
          .Items()
          .ForEach(i => // Do something with...);
-{code:c#}
+```
+
 Each facade object is actually wrapping an underlying data item, for instance the SPSiteFacade class is the fluent wrapper of the SPSite class. Depending on what kind of facade methods you are calling the method is returning either the current facade instance (e.g., ForEach() or Where()) or the method is returning a new child facade object (e.g. Items()). During the process of chaining methods in such a way you will build up a tree or hierarchy of facade instances. In order to step back to the parent or previous facade instance you need to call the End() method:
 
-{code:c#}
+```cs
 site.Use()
        .RootWeb()
          .Site()
@@ -38,14 +40,15 @@ site.Use()
          .Site()
        .End()		// Returns SPWebFacade  as parent facade
      .End();		// Returns SPSiteFacade as parent facade
-{code:c#}
+```
+
 FluentSP is currently missing a number of possible useful methods, but you can easily extend the FluentSP API with custom facade classes and extension methods, see below and source code for implementation examples. 
 
 For more details about FluentSP and other SharePoint related work feel free to visit my website at [http://www.parago.net](http://www.parago.net).
 
 **Samples:**
 
-{code:c#}
+```cs
 SPSite site = SPContext.Current.Site;
 
 // ----------------------------
@@ -137,10 +140,11 @@ site.Use()
        .Items()
         .OrderBy(i => i.Title)
         .ForEach(i => Console.WriteLine(i["Title"](_Title_)));
-{code:c#}
+```
+
 **Extensibility Samples**
 
-{code:c#}
+```cs
 // This sample is using the ThatAreCreatedBy extension method defined in Extensions.cs to show how to extend the fluent API
 site.Use()
         .RootWeb()
@@ -157,10 +161,11 @@ site.WebApplication.Use()
 // This sample uses an alternative implementation for SPSiteFacade defined in SPSiteFacadeAlternate.cs to show how to extend the fluent API
 site.WebApplication.Use().WithFirstSite().DoSomething();
 site.Use<SPSiteFacadeAlternate<BaseFacade>>().DoSomething();
-{code:c#}
+```
+
 The custom method ThatAreCreatedBy which is used in the first query of the extensibility samples is implemented as follows:
 
-{code:c#}
+```cs
 static class Extensions
 {
   public static SPListCollectionFacade<TParentFacade> ThatAreCreatedBy<TParentFacade>(this SPListCollectionFacade<TParentFacade> facade, params string[]() names)
@@ -177,7 +182,8 @@ static class Extensions
     return facade.GetCurrentFacade();
   }
 }
-{code:c#}
+```
+
 For more samples and details check out the source code you can download from this site.
 
 **Built-In Facades and Methods**
